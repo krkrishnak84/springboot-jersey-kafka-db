@@ -1,7 +1,6 @@
-package org.radhatechi.spring.controller;
+package org.radhatechi.spring.api;
 
 
-import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -10,10 +9,8 @@ import org.radhatechi.spring.dto.Customer;
 import org.radhatechi.spring.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
 

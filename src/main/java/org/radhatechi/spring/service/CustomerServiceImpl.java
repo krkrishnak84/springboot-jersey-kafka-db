@@ -1,7 +1,9 @@
 package org.radhatechi.spring.service;
 
+import com.google.gson.JsonObject;
 import org.radhatechi.spring.database.CustomerDatabase;
 import org.radhatechi.spring.dto.Customer;
+import org.radhatechi.spring.util.CustomerUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -17,5 +19,10 @@ public class CustomerServiceImpl implements CustomerService{
                 .stream()
                 .sorted(Comparator.comparing(Customer::getCustomerId))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public org.radhatechi.spring.entity.Customer captureCustomer(JsonObject payloadObject ) {
+        return CustomerUtil.prepareCustomerObj(payloadObject);
     }
 }
