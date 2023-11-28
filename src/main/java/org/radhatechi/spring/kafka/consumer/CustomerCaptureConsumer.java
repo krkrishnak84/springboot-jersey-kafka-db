@@ -4,8 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import lombok.extern.slf4j.Slf4j;
-import org.radhatechi.spring.entity.Customer;
-import org.radhatechi.spring.service.CustomerService;
+import org.radhatechi.spring.entity.CustomerEntity;
+import org.radhatechi.spring.service.CustomerDetailsManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
@@ -21,8 +21,8 @@ public class CustomerCaptureConsumer {
 
 
     @Autowired
-    private CustomerService customerService;
-    private Gson gson = new GsonBuilder().setLenient().create();
+    private CustomerDetailsManager customerDetailsManager;
+    private final Gson gson = new GsonBuilder().setLenient().create();
 
     @KafkaListener(topics = "#{topicForCustomer}", containerFactory = "concurrentKafkaListenerContainerFactory")
     public void listen(@Payload  String message, @Header(KafkaHeaders.RECEIVED_PARTITION) int partition, @Header(KafkaHeaders.OFFSET) int offset, Acknowledgment acknowledgment){
@@ -33,11 +33,12 @@ public class CustomerCaptureConsumer {
         try{
             JsonObject eventObject = gson.fromJson(message, JsonObject.class);
             JsonObject payloadObject = eventObject.get("payload").getAsJsonObject();
-            Customer customer = customerService.captureCustomer(payloadObject);
+            CustomerEntity customerEntity = customerDetailsManager.captureCustomer(payloadObject);
 
-            System.out.println("captured customer :: "+ customer);
+            System.out.println("captured customer :: "+ customerEntity);
 
         }catch (Exception e){
+            e.printStackTrace();
             System.err.println("Exception in Consumer "+e.getMessage());
         }finally {
             acknowledgment.acknowledge();

@@ -1,5 +1,6 @@
 package org.radhatechi.spring.dto;
 
+//TODO delete later
 public class Address {
 
     private String address1;

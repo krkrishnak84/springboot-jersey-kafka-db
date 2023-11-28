@@ -1,19 +1,22 @@
-package org.radhatechi.spring.entity;
+package org.radhatechi.spring.dto;
 
-
-import jakarta.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
-@Entity
-public class Address {
+import java.io.Serial;
+import java.io.Serializable;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer addressId;
+@Data
+@Builder
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class AddressInfo implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 1L;
     private String street;
     private String state;
     private String city;
@@ -51,7 +54,7 @@ public class Address {
         this.zipCode = zipCode;
     }
 
-    public Address(String street, String state, String city, Integer zipCode) {
+    public AddressInfo(String street, String state, String city, Integer zipCode) {
         this.street = street;
         this.state = state;
         this.city = city;

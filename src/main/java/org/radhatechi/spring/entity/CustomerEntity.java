@@ -6,11 +6,15 @@ import lombok.*;
 
 
 @Entity
-public class Customer {
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Builder
+public class CustomerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer customerId;
+    private Long customerId;
 
     private String firstName;
 
@@ -20,16 +24,17 @@ public class Customer {
 
     private String email;
 
-    @ManyToOne
-    private Address address;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "customerId")
+    private AddressEntity addressEntity;
 
     private Long phoneNum;
 
-    public Integer getCustomerId() {
+    public Long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Integer customerId) {
+    public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
 
@@ -65,12 +70,12 @@ public class Customer {
         this.email = email;
     }
 
-    public Address getAddress() {
-        return address;
+    public AddressEntity getAddressEntity() {
+        return addressEntity;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddressEntity(AddressEntity addressEntity) {
+        this.addressEntity = addressEntity;
     }
 
     public Long getPhoneNum() {
@@ -81,12 +86,12 @@ public class Customer {
         this.phoneNum = phoneNum;
     }
 
-    public Customer(String firstName, String lastName, String gender, String email, Address address, Long phoneNum) {
+    public CustomerEntity(String firstName, String lastName, String gender, String email, AddressEntity addressEntity, Long phoneNum) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.email = email;
-        this.address = address;
+        this.addressEntity = addressEntity;
         this.phoneNum = phoneNum;
     }
 }

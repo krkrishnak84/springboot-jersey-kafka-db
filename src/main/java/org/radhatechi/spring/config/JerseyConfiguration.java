@@ -4,17 +4,19 @@ import jakarta.annotation.PostConstruct;
 import jakarta.ws.rs.ApplicationPath;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.radhatechi.spring.api.CustomerController;
+import org.radhatechi.spring.api.CustomerDetailsAPIImpl;
 import org.radhatechi.spring.mapper.GenericExceptionMapper;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ApplicationPath("/rest")
+@ApplicationPath("/api")
 public class JerseyConfiguration extends ResourceConfig {
 
     @PostConstruct
     public void init(){
-        register(CustomerController.class);
+        //register(CustomerController.class);
         register(GenericExceptionMapper.class);
+        register(CustomerDetailsAPIImpl.class);
     }
 
 }

@@ -6,7 +6,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import lombok.extern.slf4j.Slf4j;
 import org.radhatechi.spring.dto.Customer;
-import org.radhatechi.spring.service.CustomerService;
+import org.radhatechi.spring.service.CustomerDetailsManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,18 +14,19 @@ import java.util.List;
 
 import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
 
+// TODO delete later
 @Component
 @Slf4j
 @Path("/customers")
 public class CustomerController {
 
     @Autowired
-    private CustomerService customerService;
+    private CustomerDetailsManager customerDetailsManager;
 
     @GET
     @Produces(APPLICATION_JSON)
     public List<Customer> getAllCustomers(){
-        return customerService.getAllCustomers();
+        return customerDetailsManager.getAllCustomers();
     }
 
 //    @GET()

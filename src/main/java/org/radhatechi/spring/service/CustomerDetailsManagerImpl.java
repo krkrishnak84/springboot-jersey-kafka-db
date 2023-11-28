@@ -1,9 +1,12 @@
 package org.radhatechi.spring.service;
 
 import com.google.gson.JsonObject;
+import org.radhatechi.spring.dal.jpa.service.CustomerDALService;
 import org.radhatechi.spring.database.CustomerDatabase;
 import org.radhatechi.spring.dto.Customer;
+import org.radhatechi.spring.entity.CustomerEntity;
 import org.radhatechi.spring.util.CustomerUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -12,7 +15,13 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerDetailsManagerImpl implements CustomerDetailsManager {
+
+
+    @Autowired
+    private CustomerDALService customerDALService;
+
+
     @Override
     public List<Customer> getAllCustomers() {
         return CustomerDatabase.getAllCustomers()
@@ -22,7 +31,11 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public org.radhatechi.spring.entity.Customer captureCustomer(JsonObject payloadObject ) {
-        return CustomerUtil.prepareCustomerObj(payloadObject);
-    }
+    public CustomerEntity captureCustomer(JsonObject payloadObject ) {
+
+        CustomerEntity customerEntity = CustomerUtil.prepareCustomerObj(payloadObject);
+        // save customer data in to entity
+        return customerDALService.save(customerEntity);
+       }
 }
+

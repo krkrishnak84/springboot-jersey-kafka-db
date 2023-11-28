@@ -2,13 +2,14 @@ package org.radhatechi.spring.service;
 
 import com.google.gson.JsonObject;
 import org.radhatechi.spring.dto.Customer;
+import org.radhatechi.spring.entity.CustomerEntity;
 
 import java.util.List;
 
-public interface CustomerService {
+public interface CustomerDetailsManager {
 
     List<Customer> getAllCustomers();
 
-    org.radhatechi.spring.entity.Customer captureCustomer(JsonObject payloadObject );
+    CustomerEntity captureCustomer(JsonObject payloadObject );
 
 }

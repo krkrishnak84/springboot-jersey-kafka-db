@@ -2,6 +2,7 @@ package org.radhatechi.spring.dto;
 
 import java.util.List;
 
+//TODO delete later
 public class Customer {
 
     private long customerId;
