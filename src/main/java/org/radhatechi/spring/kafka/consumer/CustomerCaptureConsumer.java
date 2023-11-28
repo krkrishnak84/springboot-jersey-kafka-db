@@ -38,7 +38,6 @@ public class CustomerCaptureConsumer {
             System.out.println("captured customer :: "+ customerEntity);
 
         }catch (Exception e){
-            e.printStackTrace();
             System.err.println("Exception in Consumer "+e.getMessage());
         }finally {
             acknowledgment.acknowledge();

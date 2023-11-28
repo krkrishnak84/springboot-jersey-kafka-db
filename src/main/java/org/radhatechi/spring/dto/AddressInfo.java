@@ -1,9 +1,6 @@
 package org.radhatechi.spring.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Data;
 
@@ -20,7 +17,7 @@ public class AddressInfo implements Serializable {
     private String street;
     private String state;
     private String city;
-    private Integer zipCode;
+    private Integer zip;
 
     public String getStreet() {
         return street;
@@ -46,18 +43,19 @@ public class AddressInfo implements Serializable {
         this.city = city;
     }
 
-    public Integer getZipCode() {
-        return zipCode;
+    public Integer getZip() {
+        return zip;
     }
 
-    public void setZipCode(Integer zipCode) {
-        this.zipCode = zipCode;
+    public void setZip(Integer zip) {
+        this.zip = zip;
     }
 
-    public AddressInfo(String street, String state, String city, Integer zipCode) {
+    public AddressInfo(String street, String state, String city, Integer zip) {
         this.street = street;
         this.state = state;
         this.city = city;
-        this.zipCode = zipCode;
+        this.zip = zip;
     }
+
 }

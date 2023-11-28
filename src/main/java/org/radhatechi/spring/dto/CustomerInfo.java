@@ -93,4 +93,17 @@ public class CustomerInfo implements Serializable {
         this.phoneNum = phoneNum;
         this.addressInfo = addressInfo;
     }
+
+    @Override
+    public String toString() {
+        return "CustomerInfo{" +
+                "customerId=" + customerId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNum=" + phoneNum +
+                ", addressInfo=" + addressInfo +
+                '}';
+    }
 }
