@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import lombok.extern.slf4j.Slf4j;
+import org.radhatechi.spring.config.GlobalConfigProperties;
+import org.radhatechi.spring.config.GlobalProperties;
 import org.radhatechi.spring.entity.CustomerEntity;
 import org.radhatechi.spring.service.CustomerDetailsManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,12 @@ public class CustomerCaptureConsumer {
 
 
     @Autowired
+    private GlobalProperties globalProperties;
+
+    @Autowired
+    private GlobalConfigProperties globalConfigProperties;
+
+    @Autowired
     private CustomerDetailsManager customerDetailsManager;
     private final Gson gson = new GsonBuilder().setLenient().create();
 
@@ -30,6 +38,11 @@ public class CustomerCaptureConsumer {
         System.out.println(partition);
         System.out.println(offset);
         System.out.println(message);
+        System.out.println("Email from global properties :: "+globalProperties.getEmail());
+        System.out.println("Email from global config properties :: "+globalConfigProperties.getEmail());
+        System.out.println("Thread pool count from global config properties :: "+globalConfigProperties.getThreadPool());
+
+
         try{
             JsonObject eventObject = gson.fromJson(message, JsonObject.class);
             JsonObject payloadObject = eventObject.get("payload").getAsJsonObject();

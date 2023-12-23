@@ -13,7 +13,6 @@ public class JerseyConfiguration extends ResourceConfig {
 
     @PostConstruct
     public void init(){
-        //register(CustomerController.class);
         register(GenericExceptionMapper.class);
         register(CustomerDetailsAPIImpl.class);
     }
