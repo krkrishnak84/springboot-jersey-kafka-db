@@ -1,28 +1,23 @@
 package org.radhatechi.spring.config;
 
 
-import org.springframework.beans.factory.annotation.Value;
+import lombok.Getter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+// TODO delete this class later
+@Getter
 @Component
-public class GlobalProperties {
+@PropertySource("file:C:\\global.properties")
+@ConfigurationProperties(prefix = "db")
+public class ExternalConfigProperties {
 
-    @Value("${thread-pool}")
     private int threadPool;
-
-    @Value("${email}")
     private String email;
-
-    public int getThreadPool() {
-        return threadPool;
-    }
 
     public void setThreadPool(int threadPool) {
         this.threadPool = threadPool;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public void setEmail(String email) {
