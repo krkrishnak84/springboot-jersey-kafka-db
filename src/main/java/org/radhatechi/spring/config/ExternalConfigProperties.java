@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 // TODO delete this class later
 @Getter
 @Component
-@PropertySource("file:C:\\global.properties")
+@PropertySource("file:${app.home}/global.properties")
 @ConfigurationProperties(prefix = "db")
 public class ExternalConfigProperties {
 
@@ -22,5 +22,13 @@ public class ExternalConfigProperties {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getThreadPool() {
+        return threadPool;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }
