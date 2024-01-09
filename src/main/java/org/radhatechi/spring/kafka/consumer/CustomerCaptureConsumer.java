@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import lombok.extern.slf4j.Slf4j;
+import org.radhatechi.spring.config.ExternalConfProps;
 import org.radhatechi.spring.config.ExternalConfigProperties;
 import org.radhatechi.spring.entity.CustomerEntity;
 import org.radhatechi.spring.service.CustomerDetailsManager;
@@ -24,6 +25,12 @@ public class CustomerCaptureConsumer {
     private ExternalConfigProperties globalConfigProperties;
 
     @Autowired
+    private ExternalConfProps externalConfProps;
+
+//    @Autowired
+//    private BeanFactoryDynamicService beanFactoryDynamicService;
+
+    @Autowired
     private CustomerDetailsManager customerDetailsManager;
     private final Gson gson = new GsonBuilder().setLenient().create();
 
@@ -33,6 +40,9 @@ public class CustomerCaptureConsumer {
         System.out.println(partition);
         System.out.println(offset);
         System.out.println(message);
+
+        System.out.println("Boot strap address:: external config properties :: "+externalConfProps.getBootStrapAddress());
+        System.out.println("Thread pool count:: external config properties :: "+externalConfProps.getThreadPoolCount());
 
         System.out.println("Email from external config properties :: "+globalConfigProperties.getEmail());
         System.out.println("Thread external count from global config properties :: "+globalConfigProperties.getThreadPool());
